@@ -1,0 +1,121 @@
+:root {
+    --orange: #f26822;
+}
+
+#main {
+  height: 100%;
+  width: 100%;
+  //background-color: #34495e;
+  position: relative;
+  top: 0;
+  bottom: 100%;
+  left: 0;
+  z-index: 1;  
+  //padding: 4em;
+  font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    // width: 80%;
+    // height: 100%;
+    // float: left;
+}
+
+#configuration-space {
+    width: 20%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 0;
+    background-color: #34495e;
+    padding: 10px;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.sidebar-btn {
+  position: absolute;
+  clip: rect(0, 0, 0, 0);
+}
+
+label[for="sidebar-btn"] {
+  position: fixed;
+  left: 13px;
+  top: 20px;
+  z-index: 2;
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+  color: #34495e;
+//   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' x='0px' y='0px' width='30px' height='30px' viewBox='0 0 30 30' enable-background='new 0 0 30 30' xml:space='preserve'><rect style='fill:rgb(255,255,255)' width='15' height='3'/><rect style='fill:rgb(255,255,255)' y='8' width='20' height='3'/><rect style='fill:rgb(255,255,255)' y='16' width='25' height='3'/></svg>");
+//   background-size: contain;
+}
+
+.sidebar-btn + label, #main {
+    transition: left 0.1s;
+  }
+  
+  .sidebar-btn:checked + label {
+    left: 21%;
+  }
+  
+  .sidebar-btn:checked ~ #main{
+    left: 20%;
+    width: calc(100% - 20%);
+  }
+
+#header {
+    display: flex;
+    justify-content: space-between;
+    height: 75px;
+    background-color: white;
+}
+
+#cns-logo {
+    margin-right: 50px;
+    height: 50px;
+    width: auto;
+    padding: 10px;
+    margin-top: 5px;
+}
+
+#other-logo{
+    margin-left: 50px;
+    height: 40px;
+    margin-top: 20px;
+}
+
+#draggable-space {
+    height: calc(100% - 75px);
+    min-width: 100%;
+}
+
+.chart {
+    display: flex;
+    height: 100%;
+}
+
+.remove-item {
+    display: none;
+}
+
+gridster-item:hover .remove-item {
+  position: absolute;
+  display: flex;
+  //width: 100%;
+  justify-content: flex-end;
+  opacity: 1;
+}
+
+
+gridster {
+    background-color: #e4e4e4;
+}
+
+.fa-times-circle {
+    font-size: 35px;
+    top: 10px;
+    right: 10px;
+    color: #666666;
+}
+

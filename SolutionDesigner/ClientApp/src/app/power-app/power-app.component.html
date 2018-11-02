@@ -1,0 +1,41 @@
+<div id="app-wrapper">
+  <div id="machine-control">
+    <div class="machine-image">
+      <img src="../../assets/arm.png" class="machine-image-resize">
+    </div>
+    <div class="operation-buttons">
+      <button (click)="startMachine()" class="gridster-item-content">Start Machine</button>
+      <button (click)="stopMachine()"  class="gridster-item-content">Stop Machine</button>
+    </div>
+  </div>
+  <div id="plc-status">
+    <div id="plc-title"> PLC Status </div>
+    <label class="data-show header">Machine State: {{machineState ? "Running": "Stopped" }}</label>
+    <hr>
+    <br>
+    <div class="item-group">
+      <img src="../../assets/g109.png" style="width: 30px; height: 45px; margin-left: 25px; margin-right: 10px;">
+      <div class="item-data">
+        <label class="data-show">Cooling Unit: {{coolingUnit | number: '1.2-2'}} ºC</label>
+        <label class="data-show">Rotor Temperature {{rotorTemperature | number: '1.2-2'}} ºC</label>
+      </div>
+    </div>
+    <br>
+    <br>
+    <div class="item-group">
+      <img src="../../assets/path433.png" style="width: 45px; height: 45px; margin-left: 13px; margin-right: 10px;">
+      <div class="item-data" style="align-items: center">
+        <label class="data-show">Fan Speed: {{fanSpeed | number: '1.2-2'}} RPM</label>
+      </div>
+    </div>
+    <br>
+    <br>
+    <div class="item-group">
+      <img src="../../assets/g63.png" style="width: 45px; height: 45px; margin-left: 13px; margin-right: 10px;">
+      <div class="item-data">
+        <label class="data-show">OilPressure: {{oilPressure | number: '1.2-2'}} PSI</label>
+        <label class="data-show">AirPressure: {{airPressure | number: '1.2-2'}} PSI</label>
+      </div>
+    </div>
+  </div>
+</div>

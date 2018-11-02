@@ -1,0 +1,48 @@
+// .arrow-down {
+//     width: 0;
+//     height: 0;
+//     border-left: 5px solid transparent;
+//     border-right: 5px solid transparent;
+//     border-top: 5px solid #fff;
+//     display: inline-block;
+//     margin-right: 5px;
+//   }
+  
+//   .arrow-right {
+//     margin-right: 5px;
+//     display: inline-block;
+//     width: 0;
+//     height: 0;
+//     border-top: 5px solid transparent;
+//     border-bottom: 5px solid transparent;
+//     border-left: 5px solid #fff;
+//   }
+ 
+select {
+  width: 100%;
+  height: 25px;
+}
+
+input {
+  //margin-top: 10px;
+  //width: 100%;
+  box-sizing: border-box;
+  height: 25px;
+}
+
+input[type="text"] {
+  width: 100%;
+}
+input[type="button"]{
+    margin-top: 10px;
+    width: 100%;
+    box-sizing: border-box;
+    border: 0px;
+    color: white;
+    height: 30px;
+    background-color: #719ECC;
+}
+
+input[type="file"] {
+  width:100%;
+}

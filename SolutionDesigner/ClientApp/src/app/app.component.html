@@ -1,0 +1,56 @@
+<!--The content below is only a placeholder and can be replaced.-->
+
+<input type="checkbox" id="sidebar-btn" class="sidebar-btn" checked />
+<label for="sidebar-btn" class="fa fa-2x fa-bars"></label>
+
+<div id="main">
+    <div id="header">
+        <div *ngIf="!dashboardLogo">Waiting for logo</div>
+        <img *ngIf="dashboardLogo" id="other-logo" [src]="'data:'+dashboardLogo.contentType+';base64,'+dashboardLogo.imageBin">
+        <img id="cns-logo" src="/assets/connecting-software-logo.png">
+    </div>
+    <div id="draggable-space">
+        <gridster [options]="options">
+            <gridster-item [item]="item" *ngFor="let item of appDashboard">
+                <i class="fa far fa-times-circle remove-item gridster-item-content" (click)="removeItem($event, item)"></i>
+                <app-power-app *ngIf="item.itemType === 'power-app'"></app-power-app>
+            </gridster-item>
+
+            <gridster-item [item]="item" *ngFor="let item of chartDashboard">
+                <i class="fa far fa-times-circle remove-item gridster-item-content" (click)="removeItem($event, item)"></i>
+
+                <ngx-charts-line-chart *ngIf="item.itemType === 'line-chart'" [results]="item.data" [animations]="item.chartOptions.animations"
+                    [legend]="item.chartOptions.showLegend" [legendTitle]="item.chartOptions.legendTitle" [gradient]="item.chartOptions.gradient"
+                    [xAxis]="item.chartOptions.showXAxis" [yAxis]="item.chartOptions.showYAxis" [showXAxisLabel]="item.chartOptions.showXAxisLabel"
+                    [showYAxisLabel]="item.chartOptions.showYAxisLabel" [xAxisLabel]="item.chartOptions.xAxisLabel"
+                    [yAxisLabel]="item.chartOptions.yAxisLabel" [autoScale]="item.chartOptions.autoScale" [xScaleMin]="item.chartOptions.xScaleMin"
+                    [xScaleMax]="item.chartOptions.xScaleMax" [yScaleMin]="item.chartOptions.yScaleMin" [yScaleMax]="item.chartOptions.yScaleMax"
+                    [timeline]="item.chartOptions.timeline" [showGridLines]="item.chartOptions.showGridLines"
+                    [rangeFillOpacity]="item.chartOptions.rangeFillOpacity" [roundDomains]="item.chartOptions.roundDomains"
+                    [tooltipDisabled]="item.chartOptions.tooltipDisabled">
+                </ngx-charts-line-chart>
+                <ngx-charts-gauge *ngIf="item.itemType === 'gauge'" [scheme]="item.chartOptions.colorScheme" [legend]="item.chartOptions.showLegend"
+                    [legendTitle]="item.chartOptions.legendTitle" [results]="item.data" [animations]="item.chartOptions.animations"
+                    [scheme]="item.chartOptions.colorScheme" [min]="item.chartOptions.min" [max]="item.chartOptions.max"
+                    [units]="item.chartOptions.units" [bigSegments]="1" [smallSegments]="1" [valueFormatting]="valueFormatting"
+                    [tooltipDisabled]="item.chartOptions.tooltipDisabled">
+                </ngx-charts-gauge>
+                <app-power-app *ngIf="item.itemType === 'power-app'"></app-power-app>
+
+            </gridster-item>
+
+            <gridster-item [item]="item" *ngFor="let item of textComponentDashboard">
+                <i class="fa far fa-times-circle remove-item gridster-item-content" (click)="removeItem($event, item)"></i>
+                <p *ngIf="item.itemType === 'text'" [style.color]="item.textOptions.color" [style.font-size.px]="item.textOptions.size">{{item.textOptions.text}}</p>
+            </gridster-item>
+        </gridster>
+    </div>
+</div>
+
+<div id="configuration-space">
+    <app-configuration-panel (newChartCreated)="onNewChartCreation($event)" (newAppCreated)="onNewAppCreation($event)"
+        (newTextCreated)="onNewTextCreation($event)" (logoCreated)="onNewLogoCreated($event)"></app-configuration-panel>
+</div>
+
+
+<router-outlet></router-outlet>
