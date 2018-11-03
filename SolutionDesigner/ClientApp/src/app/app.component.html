@@ -27,12 +27,13 @@
                     [xScaleMax]="item.chartOptions.xScaleMax" [yScaleMin]="item.chartOptions.yScaleMin" [yScaleMax]="item.chartOptions.yScaleMax"
                     [timeline]="item.chartOptions.timeline" [showGridLines]="item.chartOptions.showGridLines"
                     [rangeFillOpacity]="item.chartOptions.rangeFillOpacity" [roundDomains]="item.chartOptions.roundDomains"
+                    [scheme]="item.chartOptions.scheme"
                     [tooltipDisabled]="item.chartOptions.tooltipDisabled">
                 </ngx-charts-line-chart>
-                <ngx-charts-gauge *ngIf="item.itemType === 'gauge'" [scheme]="item.chartOptions.colorScheme" [legend]="item.chartOptions.showLegend"
+                <ngx-charts-gauge *ngIf="item.itemType === 'gauge'" [scheme]="item.chartOptions.scheme" [legend]="item.chartOptions.showLegend"
                     [legendTitle]="item.chartOptions.legendTitle" [results]="item.data" [animations]="item.chartOptions.animations"
                     [scheme]="item.chartOptions.colorScheme" [min]="item.chartOptions.min" [max]="item.chartOptions.max"
-                    [units]="item.chartOptions.units" [bigSegments]="1" [smallSegments]="1" [valueFormatting]="valueFormatting"
+                    [units]="item.chartOptions.units" [bigSegments]="1" [smallSegments]="1" [valueFormatting]="valueFormatting" [margin]="[5,5,5,5]"
                     [tooltipDisabled]="item.chartOptions.tooltipDisabled">
                 </ngx-charts-gauge>
                 <app-power-app *ngIf="item.itemType === 'power-app'"></app-power-app>
@@ -41,7 +42,7 @@
 
             <gridster-item [item]="item" *ngFor="let item of textComponentDashboard">
                 <i class="fa far fa-times-circle remove-item gridster-item-content" (click)="removeItem($event, item)"></i>
-                <p *ngIf="item.itemType === 'text'" [style.color]="item.textOptions.color" [style.font-size.px]="item.textOptions.size">{{item.textOptions.text}}</p>
+                <p *ngIf="item.itemType === 'text'" [style.color]="item.textOptions.color" [style.font-size.px]="item.textOptions.size" [style.textAlign]="item.textOptions.textAlign">{{item.textOptions.text}}</p>
             </gridster-item>
         </gridster>
     </div>

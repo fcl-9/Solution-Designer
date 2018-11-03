@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SolutionDesigner.Models;
 
 namespace SolutionDesigner.Migrations
 {
     [DbContext(typeof(SolutionDesignerContext))]
-    partial class SolutionDesignerContextModelSnapshot : ModelSnapshot
+    [Migration("20181102141032_textAlignField")]
+    partial class textAlignField
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

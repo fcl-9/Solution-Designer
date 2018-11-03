@@ -3,4 +3,5 @@ export interface TextElement {
     color: string;
     size: number;
     fontfamily: string;
+    textAlign: string;
 }

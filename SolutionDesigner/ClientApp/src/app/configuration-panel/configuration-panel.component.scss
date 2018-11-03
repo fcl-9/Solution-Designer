@@ -30,7 +30,11 @@ input {
   height: 25px;
 }
 
-input[type="text"] {
+input, select {
+  margin-bottom: 10px;
+}
+
+input[type="text"], input[type="color"] {
   width: 100%;
 }
 input[type="button"]{
@@ -45,4 +49,74 @@ input[type="button"]{
 
 input[type="file"] {
   width:100%;
+}
+
+#textAlignOptions {
+  display: flex;
+  color: white;
+  justify-content: space-around;
+  font-size: 20px;
+}
+
+.hide {
+  //display: none;
+}
+
+input[type="radio"] {
+    // visibility:hidden;
+    height:0;
+    width: 0;
+}
+
+.align-right:before {
+  content: "\f036";
+  font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+/*--adjust as necessary--*/
+    color: white;
+    font-size: 20px;
+    padding-right: 0.5em;
+    // position: absolute;
+    // top: 10px;
+    // left: 0;
+}
+.align-center:before {
+  content: "\f037";
+  font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+/*--adjust as necessary--*/
+    color: white;
+    font-size: 20px;
+    // padding-right: 0.5em;
+    // position: absolute;
+    // top: 10px;
+    // left: 0;
+}
+
+.align-left:before {
+  content: "\f038";
+  font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+/*--adjust as necessary--*/
+    color: white;
+    font-size: 20px;
+    // padding-right: 0.5em;
+    // position: absolute;
+    // top: 10px;
+    // left: 0;
+}
+
+input[type="radio"]:checked + i {
+  background-color: bisque;
+  opacity: 0.5;
+}
+
+h1 {
+  font-size: 1.8em;
 }

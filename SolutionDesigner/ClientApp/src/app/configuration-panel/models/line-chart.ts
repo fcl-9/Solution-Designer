@@ -12,6 +12,7 @@ export interface LineChart extends BaseChart  {
 export interface LineChartOptions {
     animations: boolean;
     schemeType: string;
+    scheme: any;
     showXAxis: boolean;
     showYAxis: boolean;
     gradient: boolean;

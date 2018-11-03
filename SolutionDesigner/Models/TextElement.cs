@@ -10,6 +10,7 @@ namespace SolutionDesigner.Models
         public string Fontfamily { get; set; }
         public double Size { get; set; }
         public string Text { get; set; }
+        public string textAlign { get; set; }
         public int DashboarItemdRef { get; set; }
         public virtual TextDashoardItem TextDashboardItem { get; set; }
 

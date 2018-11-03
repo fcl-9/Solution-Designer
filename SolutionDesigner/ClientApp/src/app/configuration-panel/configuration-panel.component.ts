@@ -1,10 +1,21 @@
-import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef } from "@angular/core";
+import {
+  Component,
+  OnInit,
+  Output,
+  EventEmitter,
+  ViewChild,
+  ElementRef
+} from "@angular/core";
 import { Location } from "@angular/common";
 import chartGroups from "../configuration-panel/chartTypes";
 import { Chart } from "./model";
 import { ConnectBridgeDataRequesterService } from "../services/connect-bridge-data-requester.service";
 import { ExecuteResponse } from "../service-models/execute-query-response";
-import { HttpResponse, HttpErrorResponse, HttpClient } from "@angular/common/http";
+import {
+  HttpResponse,
+  HttpErrorResponse,
+  HttpClient
+} from "@angular/common/http";
 import { Column } from "../column";
 import { DataParserService } from "../services/data-parser.service";
 import { GaugeChart } from "./models/gauge-chart";
@@ -44,6 +55,8 @@ export class ConfigurationPanelComponent implements OnInit {
   range: false;
 
   fitContainer: false;
+
+  scheme = "#000000";
 
   // options
   showXAxis = true;
@@ -118,10 +131,9 @@ export class ConfigurationPanelComponent implements OnInit {
   //   "Linear Closed"
   // ];
 
-  colorSets: any;
-  colorScheme: any = {
-    domain: ["#01579b", "#7aa3e5", "#a8385d", "#00bfa5"]
-  };
+  // colorScheme: any = {
+  //   domain: [this.scheme]
+  // };
   schemeType: "ordinal";
   selectedColorScheme: string;
   rangeFillOpacity = 0.15;
@@ -203,16 +215,18 @@ export class ConfigurationPanelComponent implements OnInit {
   optionVisible = false;
   addChartVisible = false;
 
-  fontsize: number;
-  color: string;
+  fontsize = 8;
+  color = "#000000";
   text: string;
-  fontfamily: string;
-
+  fontfamily = "\"Times New Roman\", Times, serif";
+  textAlign = "left";
   // Query to be executed for the selected chart.
   queryToExecute: string;
   columns: Array<Column>;
 
-  apps: Array<PowerApp> = [{ name: "PLC Operation and Monitoring", selector: "power-app" }];
+  apps: Array<PowerApp> = [
+    { name: "PLC Operation and Monitoring", selector: "power-app" }
+  ];
   selectedApp: PowerApp;
   appType: any;
 
@@ -223,7 +237,8 @@ export class ConfigurationPanelComponent implements OnInit {
   constructor(
     private location: Location,
     private connectBridgeService: ConnectBridgeDataRequesterService,
-    private dataParser: DataParserService, private dashboardService: DashboardStateStorageService,
+    private dataParser: DataParserService,
+    private dashboardService: DashboardStateStorageService,
     private httpRequest: HttpClient
   ) {}
 
@@ -256,6 +271,7 @@ export class ConfigurationPanelComponent implements OnInit {
         options: {
           animations: this.animations,
           schemeType: this.schemeType,
+          scheme: {domain: [this.scheme]},
           showXAxis: this.showXAxis,
           showYAxis: this.showYAxis,
           gradient: this.gradient,
@@ -292,7 +308,7 @@ export class ConfigurationPanelComponent implements OnInit {
           showLegend: this.showLegend,
           legendTitle: this.legendTitle,
           legendPosition: this.legendPosition,
-          colorScheme: this.colorScheme,
+          scheme: {domain: [this.scheme]},
           min: this.gaugeMin,
           max: this.gaugeMax,
           largeSegments: this.gaugeLargeSegments,
@@ -307,7 +323,10 @@ export class ConfigurationPanelComponent implements OnInit {
           roundDomains: this.roundDomains,
           gaugeValue: this.gaugeValue
         },
-        data: this.dataParser.singleSeriesParser(this._queryResult, this.gaugeValue),
+        data: this.dataParser.singleSeriesParser(
+          this._queryResult,
+          this.gaugeValue
+        ),
         associatedQuery: this.queryToExecute
       };
       this.newChartCreated.emit(gauge);
@@ -328,7 +347,13 @@ export class ConfigurationPanelComponent implements OnInit {
    * Creates a new Text Elment that shall be added to the GUI.
    */
   onTextAddClick() {
-    const newTextElement: TextElement = {color: this.color, size: this.fontsize, text: this.text, fontfamily: this.fontfamily};
+    const newTextElement: TextElement = {
+      color: this.color,
+      size: this.fontsize,
+      text: this.text,
+      fontfamily: this.fontfamily,
+      textAlign: this.textAlign
+    };
     this.newTextCreated.emit(newTextElement);
   }
 
@@ -339,7 +364,10 @@ export class ConfigurationPanelComponent implements OnInit {
     this.connectBridgeService.executeQuery(this.queryToExecute).subscribe(
       (result: ExecuteResponse) => {
         if (!result.IsSuccess) {
-          console.log("It was not possible to fetch data from Connect Bridge. Error: " + result.ErrorMessage);
+          console.log(
+            "It was not possible to fetch data from Connect Bridge. Error: " +
+              result.ErrorMessage
+          );
           return;
         }
         this.columns = [];
@@ -367,22 +395,32 @@ export class ConfigurationPanelComponent implements OnInit {
   onUploadLogo() {
     const data = new FormData();
     data.append("image", this.refUpdalodedFile);
-    this.httpRequest.delete("https://localhost:5001/dashboard/image/").subscribe(
-      (file: Image) => {
-        this.httpRequest.post("https://localhost:5001/dashboard/image/", data).subscribe(
-          (myFile: Image) => {
-            this.logoCreated.emit(myFile);
-            console.log("The image was saved in the database.");
-          },
-          (error: HttpErrorResponse) => {
-            console.log("There was an error uploading the image into the website. Error: " + error.message);
-          }
-        );
-      },
-      (error: HttpErrorResponse) => {
-        console.log("There was an error uploading the image into the website. Error: " + error.message);
-      }
-    );
+    this.httpRequest
+      .delete("https://localhost:5001/dashboard/image/")
+      .subscribe(
+        (file: Image) => {
+          this.httpRequest
+            .post("https://localhost:5001/dashboard/image/", data)
+            .subscribe(
+              (myFile: Image) => {
+                this.logoCreated.emit(myFile);
+                console.log("The image was saved in the database.");
+              },
+              (error: HttpErrorResponse) => {
+                console.log(
+                  "There was an error uploading the image into the website. Error: " +
+                    error.message
+                );
+              }
+            );
+        },
+        (error: HttpErrorResponse) => {
+          console.log(
+            "There was an error uploading the image into the website. Error: " +
+              error.message
+          );
+        }
+      );
   }
 
   /**

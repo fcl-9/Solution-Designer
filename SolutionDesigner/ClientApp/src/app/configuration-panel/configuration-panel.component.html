@@ -45,6 +45,12 @@
     Show Reference Lines
   </label> <br />
 </div> -->
+    <div *ngIf="chart.options.includes('colorScheme')">
+      <label>
+        Color
+        <input id="color" type="color"  value="#000000" [(ngModel)]="scheme"/>
+      </label> <br />
+    </div>
     <div *ngIf="chart.options.includes('showYAxis')">
       <label>
         <input type="checkbox" [checked]="showYAxis" (change)="showYAxis = $event.target.checked">
@@ -317,20 +323,52 @@
   <!-- Add A Text Field -->
   <div style="margin-left: 10px;">
     <h3 style="cursor: pointer"><strong>Text</strong></h3>  
-    <label for="font-size" >Font-Size</label> 
-    <input id="font-size" [(ngModel)]="fontsize" type="text"/>
+  
+    <label for="font-size" >Font-Size</label>
+    <select [(ngModel)]="fontsize">
+        <option [value]="8" >8</option>
+        <option [value]="9" >9</option>
+        <option [value]="10" >10</option>
+        <option [value]="11" >11</option>
+        <option [value]="12" >12</option>
+        <option [value]="14" >14</option>
+        <option [value]="16" >16</option>
+        <option [value]="18" >18</option>
+        <option [value]="20" >20</option>
+        <option [value]="22" >22</option>
+        <option [value]="24" >24</option>
+        <option [value]="26" >26</option>
+        <option [value]="28" >28</option>
+        <option [value]="36" >36</option>
+        <option [value]="48" >48</option>
+        <option [value]="72" >72</option>
+    </select>
+
     <label for="color">Color</label> 
-    <input id="color" [(ngModel)]="color" type="text"/>
+    <input id="color" type="color" [(ngModel)]="color" value="#000000"/>
+
     <label for="text">Text</label>     
     <input id="text" [(ngModel)]="text" type="text"/>
+
     <label for="fontFamily">Font Type</label>     
-    
     <select [(ngModel)]="fontfamily">
         <option [value]="undefined">Please select a Font Family</option>
       <ng-container *ngFor="let fonts of fontGroups">
           <option *ngFor="let font of fonts.fonts" [value]="font.value">{{font.value}}</option>
       </ng-container>
     </select>
+    
+    <label for="alignText">Align Text</label>
+    <select [(ngModel)]="textAlign">
+        <option [value]="'left'" selected="selected">Left</option>
+        <option [value]="'right'">Right</option>
+        <option [value]="'center'" >Center</option>
+    </select>
+    <!-- <div id="textAlignOptions">
+      <input [(ngModel)]="" type="radio" id="alignText" class="align-right hide" value="right" checked>
+      <input [(ngModel)]="textAlign" type="radio" id="alignText" class="align-center hide" value="center">
+      <input [(ngModel)]="textAlign" type="radio" id="alignText" class="align-left hide" value="left">
+    </div>   -->
     <input type="button" value="Add Text" (click)="onTextAddClick()" />    
   </div>
 </div>

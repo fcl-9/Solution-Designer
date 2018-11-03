@@ -14,7 +14,7 @@ export interface GaugeChartOptions {
     showLegend: boolean;
     legendTitle: string;
     legendPosition: string;
-    colorScheme: Array<string>;
+    scheme: any;
     min: number;
     max: number;
     largeSegments: number;
