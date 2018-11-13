@@ -122,20 +122,29 @@
         Show Y Axis Label
       </label> <br />
     </div>
+
     <div *ngIf="chart.options.includes('yAxisLabel')">
       <label>Y Axis Label:</label><br />
-      <select [(ngModel)]="yAxisLabel">
-        <option *ngFor="let column of columns" [ngValue]="column">{{column.name}}</option>
-      </select>
-      <!-- <input type="text" [(ngModel)]="yAxisLabel"><br /> -->
+      <input type="text" [(ngModel)]="yAxisLabel">
     </div>
-    <div *ngIf="chart.options.includes('xAxisLabel')">
-      <label>X Axis Label:</label><br />
-      <select [(ngModel)]="xAxisLabel">
-        <option *ngFor="let column of columns" [ngValue]="column">{{column.name}}</option>
-      </select>
-    </div>
-    <div *ngIf="chart.options.includes('showLabels')">
+  <div *ngIf="chart.options.includes('xAxisLabel')">
+    <label>X Axis Label:</label><br />
+    <input type="text" [(ngModel)]="xAxisLabel">
+  </div>
+  
+  <div *ngIf="chart.options.includes('xColumn')">
+    <label>X Column:</label><br />
+    <select [(ngModel)]="xColumn">
+      <option *ngFor="let column of columns" [ngValue]="column">{{column.name}}</option>
+    </select>
+  </div>
+  <div *ngIf="chart.options.includes('yColumn')">
+    <label>Y Column:</label><br />
+    <select [(ngModel)]="yColumn">
+      <option *ngFor="let column of columns" [ngValue]="column">{{column.name}}</option>
+    </select>
+  </div>
+  <div *ngIf="chart.options.includes('showLabels')">
       <label>
         <input type="checkbox" [checked]="showLabels" (change)="showLabels = $event.target.checked">
         Show Labels

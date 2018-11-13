@@ -29,7 +29,7 @@ namespace SolutionDesigner
 // #Comment
             services.AddSpaStaticFiles(configuration =>
             {
-                configuration.RootPath = "ClientApp";
+                configuration.RootPath = "ClientApp/dist/dashboard";
             });
 
             services.AddDbContext<SolutionDesignerContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SolutionDesignerContext")));

@@ -27,6 +27,7 @@ import { TextElement } from "../text-element";
 import fontGroups from "./fontFamilyTypes";
 import { DashboardStateStorageService } from "../services/dashboard-state-storage.service";
 import { Image } from "../image";
+import { THIS_EXPR } from "@angular/compiler/src/output/output_ast";
 
 @Component({
   selector: "app-configuration-panel",
@@ -67,9 +68,11 @@ export class ConfigurationPanelComponent implements OnInit {
   legendPosition = "right";
   showXAxisLabel = true;
   tooltipDisabled = false;
-  xAxisLabel: Column;
+  xAxisLabel: string;
+  xColumn: Column;
   showYAxisLabel = true;
-  yAxisLabel: Column;
+  yColumn: Column;
+  yAxisLabel: string;
   showGridLines = true;
   innerPadding = "10%";
   barPadding = 8;
@@ -264,10 +267,12 @@ export class ConfigurationPanelComponent implements OnInit {
   add_chart_click() {
     console.log(this.chart);
     if (this.chart.selector === "line-chart") {
+      if (!this.xAxisLabel) {
+        this.xAxisLabel = this.xColumn.name;
+        this.yAxisLabel = this.yColumn.name;
+      }
       let lineChart: LineChart = {
         chartType: this.chart.selector,
-        xColumn: this.xAxisLabel,
-        yColumn: this.yAxisLabel,
         options: {
           animations: this.animations,
           schemeType: this.schemeType,
@@ -278,9 +283,9 @@ export class ConfigurationPanelComponent implements OnInit {
           showLegend: this.showLegend,
           legendTitle: this.legendTitle,
           showXAxisLabel: this.showXAxisLabel,
-          xAxisLabel: this.xAxisLabel.name,
+          xAxisLabel: this.xAxisLabel,
           showYAxisLabel: this.showYAxisLabel,
-          yAxisLabel: this.yAxisLabel.name,
+          yAxisLabel: this.yAxisLabel,
           autoScale: this.autoScale,
           timeline: this.timeline,
           showGridLines: this.showGridLines,
@@ -290,12 +295,14 @@ export class ConfigurationPanelComponent implements OnInit {
           xScaleMin: this.xScaleMin,
           xScaleMax: this.xScaleMax,
           yScaleMin: this.yScaleMin,
-          yScaleMax: this.yScaleMax
+          yScaleMax: this.yScaleMax,
+          xColumn: this.xColumn,
+          yColumn: this.yColumn,
         },
         data: this.dataParser.multiSeriesPaser(
           this._queryResult,
-          this.xAxisLabel,
-          this.yAxisLabel
+          this.xColumn,
+          this.yColumn
         ),
         associatedQuery: this.queryToExecute
       };

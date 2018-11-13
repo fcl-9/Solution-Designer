@@ -227,7 +227,7 @@ export class AppComponent implements OnInit, OnDestroy {
         x: 0,
         chartOptions: castedChart.options,
         queries: [{ guiItemName: null, query: event.associatedQuery }],
-        columns: [castedChart.xColumn, castedChart.yColumn],
+        columns: [castedChart.options.xColumn, castedChart.options.yColumn],
         id: null
       };
       console.log(castedChart);

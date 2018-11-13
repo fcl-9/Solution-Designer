@@ -305,7 +305,9 @@ const chartGroups: Array<ChartGroup> = [
           "xScaleMin",
           "xScaleMax",
           "yScaleMin",
-          "yScaleMax"
+          "yScaleMax",
+          "xColumn",
+          "yColumn"
         ],
         defaults: {
           yAxisLabel: "GDP Per Capita",

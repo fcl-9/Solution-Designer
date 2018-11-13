@@ -5,8 +5,6 @@ import { Column } from "src/app/column";
 export interface LineChart extends BaseChart  {
         data: Array<any>;
         options: LineChartOptions;
-        xColumn: Column;
-        yColumn: Column;
 }
 
 export interface LineChartOptions {
@@ -32,4 +30,6 @@ export interface LineChartOptions {
     xScaleMax: any;
     yScaleMin: number;
     yScaleMax: number;
+    xColumn: Column;
+    yColumn: Column;
 }
